@@ -1,0 +1,41 @@
+{% extends 'projects/main.html' %}
+{% block content %}
+
+{% if request.user.is_authenticated %}
+<p>{{request.user}}</p>
+<a href="{% url 'logout' %}">Logout</a>
+{% else %}
+<a href=''>Login</a>
+{% endif %}
+
+
+
+<hr>
+<h1>Patient List</h1>
+<a href="{% url 'new-patient' %}">Add new Patient</a>
+<form method ="GET">
+    <input type ='text' name = 'search-area' value ="{{search_input}}">
+    <input type ="Submit" value ='Search'>
+</form>
+<table>
+
+    <tr>
+        <th>Item</th>
+    </tr>
+        {% for patient in patientsList %}
+        <tr>
+        <td>{{patient.patient_name}}</td>
+        <td><a href="{% url 'patientDetail' patient.id%}">View</a></td>
+        <td><a href="{% url 'edit-patient' patient.id%}">Edit</a></td>
+        <td><a href="{% url 'delete-patient' patient.id%}">Delete</a></td>
+        </tr>
+        <tr>
+        {% empty %}
+        <h3>No Item in list</h3>
+        {% endfor %}
+
+
+        </tr>
+    
+    </table>
+   {% endblock content %}

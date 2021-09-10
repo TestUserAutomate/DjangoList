@@ -1,0 +1,20 @@
+<h3>Patient Form</h3>
+{% extends 'projects/main.html' %}
+{% block content %}
+
+<div class="header-bar">
+    <a href="{% url 'patientsList' %}">&#8592; Back</a>
+</div>
+
+
+<div class="card-body">
+    <form method="POST" action="">
+        <button type=submit onclick="return false;" style="display:none;"></button>
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type=submit>Submit</button>
+    </form>
+</div>
+
+
+{% endblock content %}
